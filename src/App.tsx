@@ -8,9 +8,8 @@ interface TodoItem {
   priority: number;
 }
 
-// TODO: give this a type based on the TodoItem interface
 // The higher the priority number, the more important the TODO item!
-const sampleTodoItems: any[] = [
+const sampleTodoItems: TodoItem[] = [
   {
     id: 10,
     name: "Walk the dog",
@@ -32,12 +31,11 @@ const sampleTodoItems: any[] = [
 ];
 
 const App: React.FC = () => {
-  // TODO: simulate loading the todoItems into state, using an effect
-  console.log(sampleTodoItems);
+  const [todoItems, setTodoItems] = React.useState<TodoItem[]>([]);
 
-  const [todoItems, setTodoItems] = React.useState(null);
-
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+    setTodoItems(sampleTodoItems);
+  }, []);
 
   // TODO: display each TODO item, sorted from highest priority to lowest priority
   // TODO: TODO items should be colored based on priority: <10 green, 10-50 yellow, >50 red
@@ -52,7 +50,7 @@ const App: React.FC = () => {
     <div className="App">
       <h1>Hello, Dev! Welcome to the coding challenge.</h1>
       <h2>Start editing the code to see some magic happen!</h2>
-      <div>TODO List Here</div>
+      <div>TODO List Here ({todoItems.length} items loaded)</div>
     </div>
   );
 };
